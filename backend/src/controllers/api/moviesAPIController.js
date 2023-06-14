@@ -38,7 +38,7 @@ const moviesAPIController = {
                 let respuesta = {
                     meta: {
                         status: 200,
-                        total: movie.length,
+                        /* total: movie.length, */
                         url: '/api/movie/:id'
                     },
                     data: movie
