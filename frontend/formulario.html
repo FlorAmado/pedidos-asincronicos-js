@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <form class="card formulario">
+    <form class="card formulario" id="form">
         <input type="hidden" name="id">
         <div>        
             <label for="title">Título </label>
@@ -20,7 +20,7 @@
         </div>
         <div>
             <label for="rating">Calificación </label>
-            <p><input type="number" name="rating" id="rating" required></p>
+            <p><input type="number" name="rating" id="rating" step="any" required></p>
         </div>
         <div>
         <label for="awards">Premios </label>
@@ -34,14 +34,33 @@
             <label for="length">Duración </label>
             <p><input type="number" name="length" id="length" required></p>
         </div>
+        <div>        
+            <label for="genre_id">Genero </label>
+            <p><select  name="genre_id" id="genre_id" required>
+                <option value="1">Comedia</option>
+                <option value="2">Terror</option>
+                <option value="3">Drama</option>
+                <option value="4">Accion</option>
+                <option value="5">Ciencia Ficcion</option>
+                <option value="6">Suspenso</option>
+                <option value="7">Animacion</option>
+                <option value="8">Aventura</option>
+                <option value="9">Documentales</option>
+                <option value="10">Infantiles</option>
+                <option value="11">Fantasia</option>
+                <option value="12">Musicales</option>
+                </select></p>
+        </div>
+        <label for="deleteCheck">Eliminar pelicula<input type="checkbox" name="deleteCheck" id="deleteCheck"></label>
         
         <br>
         <div class="action">
-            <button class="botonAgregar" >Editar</button>
-            <button class="botonAgregar">Crear</button>
-            <button class="botonBorrar">Eliminar</button>
+            <button class="botonAgregar" id="btn-editar">Editar</button>
+            <button class="botonAgregar" id="btn-crear">Crear</button>
+            <button class="botonBorrar" id="btn-eliminar">Eliminar</button>
         </div>
     </form>
     <script src="js/formulario.js"></script>
+    <script src="js/libraries/moment.js"></script>
 </body>
 </html>

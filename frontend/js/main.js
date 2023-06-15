@@ -33,7 +33,19 @@ let data = peliculas.data;
         card.appendChild(genero);
       }
       card.appendChild(duracion);
+
+      const a = document.createElement("a");
+
+      a.setAttribute('href','formulario.html?id=' + movie.id)
+      a.setAttribute('class','botonAgregar')
+      a.textContent = 'ver mas';
+      card.appendChild(a);
+
+
     });
+
+
+
 } catch (error) {
   
 }
