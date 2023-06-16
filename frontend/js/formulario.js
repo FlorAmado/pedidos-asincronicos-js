@@ -51,6 +51,7 @@ window.onload = async () => {
         }catch (error) {
         console.log(error);
     }
+    window.location.href = 'home.html';
             
     })
 
@@ -76,6 +77,8 @@ window.onload = async () => {
         }catch (error) {
         console.log(error);
     }
+    window.location.href = 'home.html';
+
             
     })
      
@@ -93,6 +96,8 @@ window.onload = async () => {
         }catch (error) {
         console.log(error);
     }
+    window.location.href = 'home.html';
+
             
     })
             
