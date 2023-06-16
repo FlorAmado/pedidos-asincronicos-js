@@ -6,13 +6,41 @@ window.onload = () => {
 
   // Aqui debemos agregar nuestro fetch
 
+  let excuteFetch = async () => {
+    try {
+      let response = await fetch('http://localhost:3031/api/movies')
+      let peliculas = await response.json();
+      
+      pintarCards(peliculas);
 
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  /** Codigo que debemos usar para mostrar los datos en el frontend
+  excuteFetch();
+
+  let pintarCards = (peliculas) => {
+    let data = peliculas.data;
+    let ids = JSON.parse(sessionStorage.getItem('ids'))
+  
+
+  /** Codigo que debemos usar para mostrar los datos en el frontend */
+
+  if (!ids) {
+    const msg = document.createElement('h3');
+    msg.textContent = 'No tienes peliculas favoritas actualmente';
+
+    container.appendChild(msg);
+  } else {
     let data = peliculas.data;
 
+  
     data.forEach((movie) => {
-      const card = document.createElement("div");
+
+      if (ids && ids.find((element) => element === movie.id)) {
+      
+        const card = document.createElement("div");
       card.setAttribute("class", "card");
 
       const h1 = document.createElement("h1");
@@ -33,6 +61,11 @@ window.onload = () => {
         card.appendChild(genero);
       }
       card.appendChild(duracion);
+      }
+      
     });
-  */
+  }
+  }
+
+
 };

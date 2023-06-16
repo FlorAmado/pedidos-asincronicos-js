@@ -11,6 +11,8 @@ let response = await fetch('http://localhost:3031/api/movies')
 let peliculas = await response.json();
 let data = peliculas.data;
 
+let favoriteIds = JSON.parse(sessionStorage.getItem("ids")) || [];
+
     data.forEach((movie) => {
       const card = document.createElement("div");
       card.setAttribute("class", "card");
@@ -41,16 +43,49 @@ let data = peliculas.data;
       a.textContent = 'ver mas';
       card.appendChild(a);
 
+      const addButton = document.createElement("button");
 
-    });
+      addButton.setAttribute("class","botonAgregar");
+      addButton.textContent = "☆";
+      card.appendChild(addButton);
 
+      if (favoriteIds.includes(movie.id)){
+      
+      addButton.classList.add("botonAgregar");
+      addButton.textContent = "★";
+      }
 
+      addButton.addEventListener('click',()=>{
+        toggleFavorite(movie.id);
+        if (favoriteIds.includes(movie.id)) {
+          addButton.classList.remove('botonAgregar');
+          addButton.textContent = "☆";
+        }else{
+          addButton.classList.add("botonAgregar");
+          addButton.textContent = "★";
+        }
+        location.reload();
+      })
+
+    })
 
 } catch (error) {
-  
+  console.log(error);
 }
 
   /** Codigo que debemos usar para mostrar los datos en el frontend
     
   */
+ function toggleFavorite(movieId){
+  let favoriteIds = JSON.parse(sessionStorage.getItem('ids')) || [];
+  const index = favoriteIds.indexOf(movieId);
+  if (index > -1) {
+    favoriteIds.splice(index, 1);
+    
+  }else{
+    favoriteIds.push(movieId);
+  }
+  sessionStorage.setItem('ids', JSON.stringify(favoriteIds));
+
+ }
 };

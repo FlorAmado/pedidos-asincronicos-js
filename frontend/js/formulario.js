@@ -3,13 +3,12 @@ const $ = (id) => document.getElementById(id);
 
 window.onload = async () => {
     const urlParams = new URLSearchParams(location.search);
-    const valor = urlParams.get('id');
+    const id = urlParams.get('id');
 
-    
 
     try {
         
-        let response = await fetch(urlBase + valor)
+        let response = await fetch(urlBase + id)
         let pelicula = await response.json()
 
         let {title,rating, awards, length:duracion, release_date,genre_id} = pelicula.data;
@@ -34,7 +33,7 @@ window.onload = async () => {
         e.preventDefault();
     try {
         
-            response= await fetch(urlBase + 'update/' + valor,{
+            response= await fetch(urlBase + 'update/' + id,{
                 method:'PUT',
                 body: JSON.stringify({
                     title:$('title').value,
@@ -84,7 +83,7 @@ window.onload = async () => {
         e.preventDefault();
     try {
         
-        response= await fetch(urlBase + 'delete/' + valor,{
+        response= await fetch(urlBase + 'delete/' + id,{
             method:'DELETE',
            
             headers:{'Content-Type':'application/json'}
