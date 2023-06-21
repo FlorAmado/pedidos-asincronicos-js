@@ -11,7 +11,6 @@ let response = await fetch('http://localhost:3031/api/movies')
 let peliculas = await response.json();
 let data = peliculas.data;
 
-let favoriteIds = JSON.parse(sessionStorage.getItem("ids")) || [];
 
     data.forEach((movie) => {
       const card = document.createElement("div");
@@ -43,39 +42,22 @@ let favoriteIds = JSON.parse(sessionStorage.getItem("ids")) || [];
       a.textContent = 'ver mas';
       card.appendChild(a);
 
-      const addButton = document.createElement("button");
+      const buttonFav = document.createElement("button");
+      buttonFav.setAttribute("class","botonAgregar");
+      buttonFav.textContent = "☆";
+      card.appendChild(buttonFav);
 
-      addButton.setAttribute("class","botonAgregar");
-      addButton.textContent = "☆";
-      card.appendChild(addButton);
+      updateButton(buttonFav,movie.id)
 
-      if (favoriteIds.includes(movie.id)){
-      
-      addButton.classList.add("botonAgregar");
-      addButton.textContent = "★";
-      }
-
-      addButton.addEventListener('click',()=>{
+      buttonFav.addEventListener('click', () => {
         toggleFavorite(movie.id);
-        if (favoriteIds.includes(movie.id)) {
-          addButton.classList.remove('botonAgregar');
-          addButton.textContent = "☆";
-        }else{
-          addButton.classList.add("botonAgregar");
-          addButton.textContent = "★";
-        }
-        location.reload();
-      })
-
+        updateButton(buttonFav,movie.id)      
+      });
     })
-
 } catch (error) {
   console.log(error);
 }
 
-  /** Codigo que debemos usar para mostrar los datos en el frontend
-    
-  */
  function toggleFavorite(movieId){
   let favoriteIds = JSON.parse(sessionStorage.getItem('ids')) || [];
   const index = favoriteIds.indexOf(movieId);
@@ -87,5 +69,15 @@ let favoriteIds = JSON.parse(sessionStorage.getItem("ids")) || [];
   }
   sessionStorage.setItem('ids', JSON.stringify(favoriteIds));
 
+ }
+ function updateButton(button,movieId){
+  let favoriteIds = JSON.parse(sessionStorage.getItem('ids')) || [];
+
+  if (favoriteIds.includes(movieId)) {
+    button.classList.add("botonAgregar");
+    button.textContent = "★";
+  } else {
+    button.textContent = "☆";
+  }
  }
 };
